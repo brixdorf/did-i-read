@@ -66,25 +66,25 @@ export default function Calendar({ title }) {
   }
 
   return (
-    <div className="bg-gray-900 rounded-2xl p-5 w-full">
+    <div className="bg-white dark:bg-gray-900 rounded-2xl p-5 w-full">
       {/* Header */}
-      <h2 className="text-xl font-bold text-center mb-4 text-white">{title}</h2>
+      <h2 className="text-xl font-bold text-center mb-4 text-gray-900 dark:text-white">{title}</h2>
 
       {/* Month navigation */}
       <div className="flex items-center justify-between mb-4">
         <button
           onClick={prevMonth}
           disabled={isStart}
-          className="text-white px-3 py-1 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-30 disabled:cursor-not-allowed transition"
+          className="text-white px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-600 disabled:opacity-30 disabled:cursor-not-allowed transition"
         >
           ←
         </button>
-        <span className="text-white font-semibold">
+        <span className="text-gray-900 dark:text-white font-semibold">
           {MONTH_NAMES[current.month]} {current.year}
         </span>
         <button
           onClick={nextMonth}
-          className="text-white px-3 py-1 rounded-lg bg-gray-700 hover:bg-gray-600 transition"
+          className="text-white px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-600 transition"
         >
           →
         </button>
@@ -93,7 +93,7 @@ export default function Calendar({ title }) {
       {/* Day labels */}
       <div className="grid grid-cols-7 mb-2">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-          <div key={d} className="text-center text-xs text-gray-400 font-medium py-1">
+          <div key={d} className="text-center text-xs text-gray-500 dark:text-gray-400 font-medium py-1">
             {d}
           </div>
         ))}
@@ -116,7 +116,7 @@ export default function Calendar({ title }) {
                 flex items-center justify-center
                 ${checked
                   ? 'bg-green-500 text-white'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'}
               `}
             >
               {checked ? '✓' : day}
@@ -126,9 +126,9 @@ export default function Calendar({ title }) {
       </div>
 
       {/* Stats */}
-      <div className="flex justify-between mt-4 text-sm text-gray-400">
-        <span>Goal: <span className="text-white font-semibold">{daysInMonth} days</span></span>
-        <span>Achieved: <span className="text-green-400 font-semibold">{achieved} days</span></span>
+        <div className="flex justify-between mt-4 text-sm text-gray-500 dark:text-gray-400">
+          <span>Goal: <span className="text-gray-900 dark:text-white font-semibold">{daysInMonth} days</span></span>
+          <span>Achieved: <span className="text-green-600 dark:text-green-400 font-semibold">{achieved} days</span></span>
       </div>
     </div>
   )
