@@ -1,5 +1,11 @@
 import { useState } from 'react'
 
+import checkIcon from '../assets/icons/check.svg'
+import leftArrow from '../assets/icons/left-arrow.svg'
+import rightArrow from '../assets/icons/right-arrow.svg'
+import leftArrowClicked from '../assets/icons/left-arrow-clicked.svg'
+import rightArrowClicked from '../assets/icons/right-arrow-clicked.svg'
+
 const MARCH_2026 = { month: 2, year: 2026 } 
 // I have set a fixed start month because this is the month I started tracking.
 
@@ -21,6 +27,8 @@ function getFirstDayOfMonth(month, year) {
 export default function Calendar({ title }) {
   const [current, setCurrent] = useState({ month: MARCH_2026.month, year: MARCH_2026.year })
   const [checkedDays, setCheckedDays] = useState({})
+  const [pressLeft, setPressLeft] = useState(false)
+  const [pressRight, setPressRight] = useState(false)
 
   const daysInMonth = getDaysInMonth(current.month, current.year)
   const firstDay = getFirstDayOfMonth(current.month, current.year)
@@ -75,18 +83,21 @@ export default function Calendar({ title }) {
         <button
           onClick={prevMonth}
           disabled={isStart}
-          className="text-white px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-600 disabled:opacity-30 disabled:cursor-not-allowed transition"
+          className="disabled:opacity-30 disabled:cursor-not-allowed transition"
+          onMouseDown={() => setPressLeft(true)}
+          onMouseUp={() => setPressLeft(false)}
         >
-          ←
+          {pressLeft ? <img src={leftArrowClicked} className="w-17"/> : <img src={leftArrow} className="w-17"/>}
         </button>
         <span className="text-gray-900 dark:text-white font-semibold">
           {MONTH_NAMES[current.month]} {current.year}
         </span>
         <button
           onClick={nextMonth}
-          className="text-white px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-600 transition"
+          onMouseDown={() => setPressRight(true)}
+          onMouseUp={() => setPressRight(false)}
         >
-          →
+          {pressRight ? <img src={rightArrowClicked} className="w-17"/> : <img src={rightArrow} className="w-17"/>}
         </button>
       </div>
 
@@ -119,7 +130,7 @@ export default function Calendar({ title }) {
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'}
               `}
             >
-              {checked ? '✓' : day}
+              {checked ? <img src={checkIcon} className="w-5"/> : day}
             </button>
           )
         })}
