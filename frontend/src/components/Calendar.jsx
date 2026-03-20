@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 import checkIcon from '../assets/icons/check.svg'
 import leftArrow from '../assets/icons/left-arrow.svg'
@@ -24,11 +25,29 @@ function getFirstDayOfMonth(month, year) {
 }
 // This gives us the day of the week for the first day of the month. We need this to know how many empty cells to render at the start of the calendar grid.
 
-export default function Calendar({ title }) {
+export default function Calendar({ title, type }) {
   const [current, setCurrent] = useState({ month: MARCH_2026.month, year: MARCH_2026.year })
   const [checkedDays, setCheckedDays] = useState({})
   const [pressLeft, setPressLeft] = useState(false)
   const [pressRight, setPressRight] = useState(false)
+
+  useEffect(() => {
+  async function fetchHabits() {
+    const response = await fetch(
+      `http://localhost:3000/api/habits?month=${current.month}&year=${current.year}&type=${type}`,
+      { credentials: 'include' }
+    )
+    const habits = await response.json()
+    const checked = {}
+    habits.forEach(habit => {
+      const key = `${habit.year}-${habit.month}-${habit.day}`
+      checked[key] = true
+    })
+    setCheckedDays(checked)
+  }
+
+  fetchHabits()
+}, [current.month, current.year])
 
   const daysInMonth = getDaysInMonth(current.month, current.year)
   const firstDay = getFirstDayOfMonth(current.month, current.year)
@@ -38,10 +57,25 @@ export default function Calendar({ title }) {
   ).length
   // This gives us an array of keys that are checked and belong to the current month, and we take its length to get the count of achieved days.
 
-  function toggleDay(day) {
-    const key = `${current.year}-${current.month}-${day}`
+  async function toggleDay(day) {
+  const key = `${current.year}-${current.month}-${day}`
+  
+  const response = await fetch('http://localhost:3000/api/habits/toggle', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({
+      type,
+      day,
+      month: current.month,
+      year: current.year
+    })
+  })
+
+  if (response.ok) {
     setCheckedDays(prev => ({ ...prev, [key]: !prev[key] }))
   }
+}
   // The spread operator copies the existing state, and then we overwrite the specific day key with its toggled value.
 
   function prevMonth() {

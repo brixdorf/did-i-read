@@ -7,8 +7,8 @@ export default function HomePage() {
         Did I Read Today?
       </h1>
       <div className="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
-        <Calendar title="📰 Newspaper" />
-        <Calendar title="📚 Book" />
+        <Calendar title="📰 Newspaper" type="newspaper" />
+<Calendar title="📚 Book" type="book" />
       </div>
     </div>
   )
