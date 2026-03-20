@@ -5,12 +5,19 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const app = express()
 const PORT = process.env.PORT || 3000
+const cors = require('cors')
+const cookieParser = require('cookie-parser')
 
 app.use(express.json())
 
+app.use(cookieParser())
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}))
+
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
+  const token = req.cookies.token
 
   if (!token) {
     return res.status(401).json({ message: 'No token provided' })
@@ -43,7 +50,12 @@ app.post('/api/login', (req, res) => {
   { expiresIn: '1d' }
 )
 
-  return res.json({ token })
+  res.cookie('token', token, {
+  httpOnly: true,
+  sameSite: 'strict',
+  maxAge: 24 * 60 * 60 * 1000
+})
+  return res.json({ success: true })
 })
 
 app.get('/api/habits', authenticateToken, (req, res) => {
