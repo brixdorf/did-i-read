@@ -1,12 +1,12 @@
 export async function apiFetch(url, options = {}) {
   const response = await fetch(url, {
     ...options,
-    credentials: 'include'
-  })
+    credentials: "include",
+  });
 
   if (response.status === 401 || response.status === 403) {
-    return null
+    return null;
   }
 
-  return response
+  return response;
 }

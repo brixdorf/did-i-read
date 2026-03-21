@@ -1,6 +1,6 @@
-const Database = require('better-sqlite3')
+const Database = require("better-sqlite3");
 
-const db = new Database('database.db')
+const db = new Database("database.db");
 
 db.exec(`
     CREATE TABLE IF NOT EXISTS habits (
@@ -10,6 +10,6 @@ db.exec(`
         month INTEGER NOT NULL,
         year INTEGER NOT NULL
     )
-    `)
+    `);
 
-module.exports = db
+module.exports = db;

@@ -1,4 +1,4 @@
-import Calendar from '../components/Calendar'
+import Calendar from "../components/Calendar";
 
 export default function HomePage() {
   return (
@@ -8,8 +8,8 @@ export default function HomePage() {
       </h1>
       <div className="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
         <Calendar title="📰 Newspaper" type="newspaper" />
-<Calendar title="📚 Book" type="book" />
+        <Calendar title="📚 Book" type="book" />
       </div>
     </div>
-  )
+  );
 }

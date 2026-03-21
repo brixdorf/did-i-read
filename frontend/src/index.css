@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('/src/assets/fonts/Satoshi-Variable.woff2') format('woff2');
+  font-family: "Satoshi";
+  src: url("./assets/fonts/Satoshi-Variable.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @theme {
-  --font-heading: 'UnifrakturMaguntia', cursive;
-  --font-body: 'Satoshi', sans-serif;
+  --font-heading: "UnifrakturMaguntia", cursive;
+  --font-body: "Satoshi", sans-serif;
 }
 
 body {
