@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiFetch } from "../utils/api";
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -6,17 +7,19 @@ export default function Login({ onLogin }) {
   const [error, setError] = useState("");
 
   async function handleLogin() {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
+    const response = await apiFetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify({ username, password }),
     });
 
+    if (!response) {
+      setError("Invalid credentials");
+      return;
+    }
+
     if (response.ok) {
       onLogin(true);
-    } else {
-      setError("Invalid credentials");
     }
   }
 

@@ -49,7 +49,7 @@ export default function Calendar({ title, type }) {
   useEffect(() => {
     async function fetchHabits() {
       const response = await apiFetch(
-        `${import.meta.env.VITE_API_URL}/api/habits?month=${current.month}&year=${current.year}&type=${type}`,
+        `/api/habits?month=${current.month}&year=${current.year}&type=${type}`,
       );
       if (!response) return;
       const habits = await response.json();
@@ -76,19 +76,16 @@ export default function Calendar({ title, type }) {
   async function toggleDay(day) {
     const key = `${current.year}-${current.month}-${day}`;
 
-    const response = await apiFetch(
-      `${import.meta.env.VITE_API_URL}/api/habits/toggle`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type,
-          day,
-          month: current.month,
-          year: current.year,
-        }),
-      },
-    );
+    const response = await apiFetch("/api/habits/toggle", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type,
+        day,
+        month: current.month,
+        year: current.year,
+      }),
+    });
     if (!response) return;
     if (response.ok) {
       setCheckedDays((prev) => ({ ...prev, [key]: !prev[key] }));

@@ -9,9 +9,7 @@ export default function App() {
 
   useEffect(() => {
     async function verify() {
-      const response = await apiFetch(
-        `${import.meta.env.VITE_API_URL}/api/verify`,
-      );
+      const response = await apiFetch("/api/verify");
       if (!response) return;
       if (response.ok) {
         setIsLoggedIn(true);
