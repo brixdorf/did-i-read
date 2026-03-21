@@ -79,6 +79,10 @@ app.post('/api/habits/toggle', authenticateToken, (req, res) => {
 }
 })
 
+app.get('/api/verify', authenticateToken, (req, res) => {
+  return res.json({ success: true })
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
