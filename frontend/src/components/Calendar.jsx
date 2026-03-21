@@ -7,6 +7,8 @@ import rightArrow from '../assets/icons/right-arrow.svg'
 import leftArrowClicked from '../assets/icons/left-arrow-clicked.svg'
 import rightArrowClicked from '../assets/icons/right-arrow-clicked.svg'
 
+import { apiFetch } from '../utils/api'
+
 const MARCH_2026 = { month: 2, year: 2026 } 
 // I have set a fixed start month because this is the month I started tracking.
 
@@ -33,10 +35,10 @@ export default function Calendar({ title, type }) {
 
   useEffect(() => {
   async function fetchHabits() {
-    const response = await fetch(
-      `http://localhost:3000/api/habits?month=${current.month}&year=${current.year}&type=${type}`,
-      { credentials: 'include' }
+    const response = await apiFetch(
+      `http://localhost:3000/api/habits?month=${current.month}&year=${current.year}&type=${type}`
     )
+    if (!response) return
     const habits = await response.json()
     const checked = {}
     habits.forEach(habit => {
@@ -60,10 +62,9 @@ export default function Calendar({ title, type }) {
   async function toggleDay(day) {
   const key = `${current.year}-${current.month}-${day}`
   
-  const response = await fetch('http://localhost:3000/api/habits/toggle', {
+  const response = await apiFetch('http://localhost:3000/api/habits/toggle', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
     body: JSON.stringify({
       type,
       day,
@@ -71,7 +72,7 @@ export default function Calendar({ title, type }) {
       year: current.year
     })
   })
-
+  if (!response) return
   if (response.ok) {
     setCheckedDays(prev => ({ ...prev, [key]: !prev[key] }))
   }
