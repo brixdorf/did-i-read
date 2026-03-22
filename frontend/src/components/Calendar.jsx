@@ -138,9 +138,11 @@ export default function Calendar({ title, type }) {
           disabled={isStart}
           className="disabled:opacity-30 disabled:cursor-not-allowed transition"
           onMouseDown={() => setPressLeft(true)}
-          onMouseUp={() => setPressLeft(false)}
+
+          onMouseUp={() => setTimeout(() => setPressLeft(false), 100)}
+onTouchEnd={() => setTimeout(() => setPressLeft(false), 100)}
           onTouchStart={() => setPressLeft(true)}
-          onTouchEnd={() => setPressLeft(false)}
+
         >
           {pressLeft ? (
             <img src={leftArrowClicked} className="w-17" />
@@ -154,9 +156,10 @@ export default function Calendar({ title, type }) {
         <button
           onClick={nextMonth}
           onMouseDown={() => setPressRight(true)}
-          onMouseUp={() => setPressRight(false)}
+          onMouseUp={() => setTimeout(() => setPressRight(false), 100)}
+onTouchEnd={() => setTimeout(() => setPressRight(false), 100)}
           onTouchStart={() => setPressRight(true)}
-          onTouchEnd={() => setPressRight(false)}
+
         >
           {pressRight ? (
             <img src={rightArrowClicked} className="w-17" />
