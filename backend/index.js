@@ -47,13 +47,13 @@ app.post("/api/login", (req, res) => {
   }
 
   const token = jwt.sign({ username }, process.env.JWT_SECRET, {
-    expiresIn: "3m",
+    expiresIn: "10d",
   });
 
   res.cookie("token", token, {
     httpOnly: true,
     sameSite: "strict",
-    maxAge: 3 * 60 * 1000,
+    maxAge: 10 * 24 * 60 * 60 * 1000,
   });
   return res.json({ success: true });
 });
