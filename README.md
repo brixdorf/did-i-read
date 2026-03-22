@@ -27,43 +27,41 @@ Built with React, Node.js, Express, and SQLite. Deployed at [didiread.romitraj.d
 
 ## Project Structure
 
-
-
 ```
 did-i-read/
   frontend/
-  ├── public/ 
-  ├── src/ 
-  │ ├── assets/ 
-  │ │ ├── fonts/ 
-  │ │ └── icons/ 
+  ├── public/
+  ├── src/
+  │ ├── assets/
+  │ │ ├── fonts/
+  │ │ └── icons/
   │ │
-  │ ├── components/ 
+  │ ├── components/
   │ │ └── Calendar.jsx
   │ │
-  │ ├── pages/ 
+  │ ├── pages/
   │ │ ├── HomePage.jsx
   │ │ └── Login.jsx
   │ │
   │ ├── utils/
-  │ │ └── api.js 
+  │ │ └── api.js
   │ │
-  │ ├── App.jsx 
-  │ ├── index.css 
-  │ └── main.jsx 
+  │ ├── App.jsx
+  │ ├── index.css
+  │ └── main.jsx
   │
-  ├── .env.development 
-  ├── .env.production 
+  ├── .env.development
+  ├── .env.production
   │
-  ├── .gitignore 
-  └── index.html 
+  ├── .gitignore
+  └── index.html
 
   backend/
   ├── .env
   ├── .gitignore
   ├── database.db
   ├── database.js
-  └── index.js         
+  └── index.js
 ```
 
 ## Local Development
@@ -157,4 +155,3 @@ Frontend runs at `http://localhost:5173`, backend at `http://localhost:3000`.
 | `VITE_API_URL` | Backend URL (e.g. http://localhost:3000) |
 
 In production `VITE_API_URL` is left empty since frontend and backend are on the same domain.
-

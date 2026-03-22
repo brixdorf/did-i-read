@@ -17,21 +17,18 @@ body {
   font-family: var(--font-body);
 }
 
-
-
 .heading-3d {
   color: #f59e0b;
-  text-shadow: 
+  text-shadow:
     1px 1px 0px #92400e,
     2px 2px 0px #78350f,
     3px 3px 0px #451a03;
 }
 
-
 @media (prefers-color-scheme: light) {
   .heading-3d {
     color: #000000;
-    text-shadow: 
+    text-shadow:
       1px 1px 0px #ffffff,
       2px 2px 0px #ffffffaa,
       3px 3px 0px #ffffff66;
@@ -39,12 +36,13 @@ body {
 }
 
 .rainbow-bg {
-  background: linear-gradient(135deg, 
-    #ff6b6b, 
-    #ffa500, 
-    #ffeb3b, 
-    #4caf50, 
-    #2196f3, 
+  background: linear-gradient(
+    135deg,
+    #ff6b6b,
+    #ffa500,
+    #ffeb3b,
+    #4caf50,
+    #2196f3,
     #9c27b0
   );
 }
