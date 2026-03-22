@@ -1,4 +1,7 @@
-# ![Website Icon](/frontend/public/website_icon.png) Did I Read Today?
+<div align="center">
+  <img src="frontend/public/website_icon.png" width="80" alt="Website Icon?" />
+  <h1>Did I Read Today?</h1>
+</div>
 
 A personal habit tracker to log daily newspaper and book reading.
 Built with React, Node.js, Express, and SQLite. Deployed at [didiread.romitraj.dev](https://didiread.romitraj.dev).
