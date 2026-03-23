@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="frontend/public/website_icon.png" width="80" alt="Website Icon?" />
+  <img src="frontend/public/website_icon.png" width="80" alt="Website Icon" />
   <h1>Did I Read Today?</h1>
 </div>
 
