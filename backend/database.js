@@ -1,6 +1,6 @@
 const Database = require("better-sqlite3");
 
-const db = new Database("database.db");
+const db = new Database("./data/database.db");
 
 db.exec(`
     CREATE TABLE IF NOT EXISTS habits (

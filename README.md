@@ -57,9 +57,11 @@ did-i-read/
   └── index.html
 
   backend/
+  ├── data/
+  │ └── database.db
+  │
   ├── .env
   ├── .gitignore
-  ├── database.db
   ├── database.js
   └── index.js
 ```
@@ -155,3 +157,51 @@ Frontend runs at `http://localhost:5173`, backend at `http://localhost:3000`.
 | `VITE_API_URL` | Backend URL (e.g. http://localhost:3000) |
 
 In production `VITE_API_URL` is left empty since frontend and backend are on the same domain.
+
+## Docker
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Setup
+
+Clone the repo:
+
+```bash
+git clone git@github.com:brixdorf/did-i-read.git
+cd did-i-read
+```
+
+Create a `.env` file using `.env.example` as reference:
+
+```bash
+cp .env.example .env
+```
+
+Fill in your values in `.env`. To generate a bcrypt password hash:
+
+```bash
+node -e "const bcrypt = require('bcrypt'); console.log(bcrypt.hashSync('yourpassword', 10))"
+```
+
+### Run
+
+```bash
+docker-compose up --build
+```
+
+The app will be available at `http://localhost`.
+
+### Stop
+
+```bash
+docker-compose down
+```
+
+To stop and remove the database volume:
+
+```bash
+docker-compose down -v
+```
