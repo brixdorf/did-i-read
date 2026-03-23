@@ -39,8 +39,8 @@ function getFirstDayOfMonth(month, year) {
 
 export default function Calendar({ title, type }) {
   const [current, setCurrent] = useState({
-    month: MARCH_2026.month,
-    year: MARCH_2026.year,
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
   });
   const [checkedDays, setCheckedDays] = useState({});
   const [pressLeft, setPressLeft] = useState(false);
