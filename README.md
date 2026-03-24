@@ -86,12 +86,6 @@ Create a `.env` file using `.env.example` as reference:
 cp .env.example .env
 ```
 
-Generate a bcrypt hash for your password:
-
-```bash
-node -e "const bcrypt = require('bcrypt'); console.log(bcrypt.hashSync('yourpassword', 10))"
-```
-
 Start the backend:
 
 ```bash
@@ -119,6 +113,24 @@ npm run dev
 
 Frontend runs at `http://localhost:5173`, backend at `http://localhost:3000`.
 
+## Setting Up Credentials
+
+### JWT Secret
+
+Must be a random string of at least 32 characters containing uppercase, lowercase, numbers and special characters. Never share this or commit it anywhere.
+
+Example: `xK9#mP2$nQ7@wL4&vR6!jH3*cF8^bN57`
+
+### Password Hash
+
+Your password must be stored as a bcrypt hash, never as plain text. To generate one, run:
+
+```bash
+node -e "const bcrypt = require('bcrypt'); console.log(bcrypt.hashSync('yourpassword', 10))"
+```
+
+Copy the output and use it as your `PASSWORD` value in `.env`.
+
 ## Deployment
 
 ### Requirements
@@ -142,13 +154,13 @@ Frontend runs at `http://localhost:5173`, backend at `http://localhost:3000`.
 
 ### Backend `.env`
 
-| Variable      | Description                               |
-| ------------- | ----------------------------------------- |
-| `JWT_SECRET`  | Long random string for signing JWT tokens |
-| `USERNAME`    | Login username                            |
-| `PASSWORD`    | bcrypt hashed password                    |
-| `PORT`        | Server port (default 3000)                |
-| `CORS_ORIGIN` | Frontend URL for CORS                     |
+| Variable      | Description                          |
+| ------------- | ------------------------------------ |
+| `JWT_SECRET`  | Random string, minimum 32 characters |
+| `USERNAME`    | Login username                       |
+| `PASSWORD`    | bcrypt hashed password               |
+| `PORT`        | Server port (default 3000)           |
+| `CORS_ORIGIN` | Frontend URL for CORS                |
 
 ### Frontend `.env.development`
 
@@ -160,48 +172,6 @@ In production `VITE_API_URL` is left empty since frontend and backend are on the
 
 ## Docker
 
-### Prerequisites
+A Docker image is available on Docker Hub with full setup instructions.
 
-- Docker
-- Docker Compose
-
-### Setup
-
-Clone the repo:
-
-```bash
-git clone git@github.com:brixdorf/did-i-read.git
-cd did-i-read
-```
-
-Create a `.env` file using `.env.example` as reference:
-
-```bash
-cp .env.example .env
-```
-
-Fill in your values in `.env`. To generate a bcrypt password hash:
-
-```bash
-node -e "const bcrypt = require('bcrypt'); console.log(bcrypt.hashSync('yourpassword', 10))"
-```
-
-### Run
-
-```bash
-docker-compose up --build
-```
-
-The app will be available at `http://localhost`.
-
-### Stop
-
-```bash
-docker-compose down
-```
-
-To stop and remove the database volume:
-
-```bash
-docker-compose down -v
-```
+[![Docker Hub](https://img.shields.io/badge/Docker%20Hub-brixdorf%2Fdid--i--read-blue?logo=docker)](https://hub.docker.com/r/brixdorf/did-i-read)
